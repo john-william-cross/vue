@@ -73,7 +73,7 @@ html {
   transform-style: preserve-3d;
 }
 .cards .card .back {
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/102308/card_backside.jpg");
+  background-image: url("/img/card.jpg");
   background-size: 90%;
   background-position: center;
   background-repeat: no-repeat;
