@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+    <link rel="stylesheet" href="css/app.css">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="cards">
+        <div class="card" v-for="card in cards" :class="{ flipped: card.flipped, found: card.found }" @click="flipCard(card)">
+          <div class="back"></div>
+          <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
+        </div>
+      </div>
+      <div class="splash" v-if="showSplash">
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="title">You won!</div>
+          <button class="newGame" @click="resetGame()">New game</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/babel">
+      const CardTypes = [
+        { name: "bird", image: "/img/animals/bird.png" },
+        { name: "cat", image: "/img/animals/cat.png" },
+      ];
+
+      const shuffleCards = () => {
+        const cards = [].concat(_.cloneDeep(CardTypes), _.cloneDeep(CardTypes));
+        return _.shuffle(cards);
+      }
+
+      new Vue({
+        el: "#app",
+
+        data: {
+          cards: [],
+          showSplash: false
+        },
+
+        methods: {
+          resetGame() {
+            this.showSplash = false;
+            const cards = shuffleCards();
+
+            _.each(cards, (card) => {
+              card.flipped = false;
+              card.found = false;
+            });
+
+            this.cards = cards;
+          },
+
+          flipCard(card) {
+            //implement this method :)
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
